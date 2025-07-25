@@ -6,8 +6,8 @@ import MemberwiseInit
 @MemberwiseInit(.public)
 public struct Client: Sendable {
   public var httpClient: URLSession = .shared
-  public var baseUrl: URL = URL(string: "https://cooking-records.ex.oishi-kenko.com")!  
-  
+  public var baseUrl: URL = URL(string: "https://cooking-records.ex.oishi-kenko.com")!
+
   /// 料理の記録を取得
   /// - Parameters:
   ///   - offset: 取得する記録のオフセット
@@ -17,22 +17,23 @@ public struct Client: Sendable {
     offset: Int = 50,
     limit: Int = 10
   ) async throws -> CookingRecordsResponse {
-    let url = baseUrl
+    let url =
+      baseUrl
       .appending(path: "cooking_records")
       .appending(queryItems: [
         .init(name: "offset", value: String(offset)),
         .init(name: "limit", value: String(limit)),
       ])
-    
+
     let request = HTTPRequest(
       method: .get,
       url: url
     )
-    
+
     let (data, _) = try await httpClient.data(for: request)
-    
+
     let response = try JSONDecoder.tanoshiiRecipe.decode(CookingRecordsResponse.self, from: data)
-    
+
     return response
   }
 }
