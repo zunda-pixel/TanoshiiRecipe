@@ -14,7 +14,7 @@ public struct Client: Sendable {
   ///   - limit: 一度のリクエストで取得する記録数
   /// - Returns: `CookingRecordsResponse`
   public func cookingRecords(
-    offset: Int = 50,
+    offset: Int = 0,
     limit: Int = 10
   ) async throws -> CookingRecordsResponse {
     let url =
