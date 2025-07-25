@@ -9,7 +9,7 @@ struct TanoshiiRecipeAPITests {
     let client = Client()
     _ = try await client.cookingRecords()
   }
-  
+
   @Test
   func decodeResponse() async throws {
     let url = Bundle.module.url(forResource: "Response", withExtension: "json")!
