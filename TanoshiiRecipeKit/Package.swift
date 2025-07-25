@@ -4,6 +4,7 @@ import PackageDescription
 
 let package = Package(
   name: "TanoshiiRecipeKit",
+  defaultLocalization: "en",
   platforms: [
     .iOS(.v18),
     .macOS(.v15),
