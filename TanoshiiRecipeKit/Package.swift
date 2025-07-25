@@ -20,6 +20,7 @@ let package = Package(
   ],
   dependencies: [
     .package(url: "https://github.com/apple/swift-http-types.git", from: "1.4.0"),
+    .package(url: "https://github.com/gohanlon/swift-memberwise-init-macro.git", from: "0.5.2"),
   ],
   targets: [
     .target(
@@ -32,7 +33,8 @@ let package = Package(
       name: "TanoshiiRecipeAPI",
       dependencies: [
         .product(name: "HTTPTypes", package: "swift-http-types"),
-        .product(name: "HTTPTypesFoundation", package: "swift-http-types")
+        .product(name: "HTTPTypesFoundation", package: "swift-http-types"),
+        .product(name: "MemberwiseInit", package: "swift-memberwise-init-macro"),
       ]
     ),
     .testTarget(
