@@ -1,7 +1,7 @@
 import Foundation
 
 extension JSONDecoder {
-  static var tanoshiiRecipe: JSONDecoder {
+  public static var tanoshiiRecipe: JSONDecoder {
     let decoder = JSONDecoder()
     decoder.keyDecodingStrategy = .convertFromSnakeCase
     decoder.dateDecodingStrategy = .custom({ decoder in
