@@ -55,7 +55,7 @@ enum TabItem: CaseIterable {
     case .home: "house"
     case .favorite: "heart"
     case .makeRecipe: "square.and.pencil"
-    case .record: "graph.2d"
+    case .record: "chart.bar.doc.horizontal"
     case .mypage: "person"
     }
   }
