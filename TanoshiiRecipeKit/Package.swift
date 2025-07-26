@@ -22,12 +22,14 @@ let package = Package(
   dependencies: [
     .package(url: "https://github.com/apple/swift-http-types.git", from: "1.4.0"),
     .package(url: "https://github.com/gohanlon/swift-memberwise-init-macro.git", from: "0.5.2"),
+    .package(url: "https://github.com/onevcat/Kingfisher.git", from: "8.5.0"),
   ],
   targets: [
     .target(
       name: "TanoshiiRecipeUI",
       dependencies: [
-        .target(name: "TanoshiiRecipeAPI")
+        .target(name: "TanoshiiRecipeAPI"),
+        .product(name: "Kingfisher", package: "Kingfisher"),
       ]
     ),
     .target(
