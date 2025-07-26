@@ -1,20 +1,62 @@
 import SwiftUI
-import TanoshiiRecipeAPI
 
 public struct ContentView: View {
+  @State var selectedTab: TabItem = .record
+  
   public init() {}
-
-  public var body: some View {
-    VStack {
-      Image(systemName: "globe")
-        .imageScale(.large)
-        .foregroundStyle(.tint)
-      Text("Hello, world!")
+  
+  @ViewBuilder
+  func tabView(_ tab: TabItem) -> some View {
+    switch tab {
+    case .home: Text("Home")
+    case .favorite: Text("Favorite")
+    case .makeRecipe: Text("Recipe")
+    case .record: RecordView()
+    case .mypage: Text("MyPage")
     }
-    .padding()
+  }
+  
+  public var body: some View {
+    TabView(selection: $selectedTab) {
+      ForEach(TabItem.allCases, id: \.self) { tab in
+        Tab(value: tab) {
+          tabView(tab)
+        } label: {
+          Label {
+            Text(tab.label)
+          } icon: {
+            Image(systemName: tab.iconName)
+          }
+        }
+      }
+    }
   }
 }
 
-#Preview {
-  ContentView()
+enum TabItem: CaseIterable {
+  case home
+  case favorite
+  case makeRecipe
+  case record
+  case mypage
+  
+  var label: LocalizedStringKey {
+    switch self {
+    case .home: "Home"
+    case .favorite: "Favorite"
+    case .makeRecipe: "Recipe"
+    case .record: "Record"
+    case .mypage: "MyPage"
+    }
+  }
+  
+  var iconName: String {
+    switch self {
+    case .home: "house"
+    case .favorite: "heart"
+    case .makeRecipe: "square.and.pencil"
+    case .record: "graph.2d"
+    case .mypage: "person"
+    }
+  }
 }
