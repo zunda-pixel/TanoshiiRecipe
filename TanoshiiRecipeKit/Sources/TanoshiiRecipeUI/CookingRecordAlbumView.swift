@@ -8,7 +8,7 @@ struct CookingRecordAlbumView: View {
     var cookingRecords: [CookingRecord] = []
     
     @ObservationIgnored var pagination: Pagination?
-    let client = Client()
+    @ObservationIgnored let client = Client()
     var isLoading = false
     
     var selectedCookingRecord: CookingRecord?
