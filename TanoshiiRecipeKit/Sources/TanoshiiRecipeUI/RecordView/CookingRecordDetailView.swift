@@ -28,10 +28,9 @@ struct CookingRecordDetailView: View {
       }
 
       Text(cookingRecord.comment)
-        .lineLimit(nil)
     }
     #if !os(macOS)
-      .listStyle(.insetGrouped)
+    .listStyle(.plain)
     #endif
     .toolbar {
       #if !os(macOS)
