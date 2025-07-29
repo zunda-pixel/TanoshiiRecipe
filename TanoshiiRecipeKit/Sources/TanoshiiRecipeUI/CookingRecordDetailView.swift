@@ -1,11 +1,11 @@
-import SwiftUI
 import Kingfisher
+import SwiftUI
 import TanoshiiRecipeAPI
 
 struct CookingRecordDetailView: View {
   var cookingRecord: CookingRecord
   @Environment(\.dismiss) var dismiss
-  
+
   var body: some View {
     NavigationStack {
       List {
@@ -18,11 +18,11 @@ struct CookingRecordDetailView: View {
               .background(.regularMaterial, in: .capsule)
               .padding(5)
           }
-        
+
         LabeledContent("Registerd at") {
           Text(cookingRecord.recordedAt, style: .date)
         }
-        
+
         Text(cookingRecord.comment)
           .lineLimit(nil)
       }

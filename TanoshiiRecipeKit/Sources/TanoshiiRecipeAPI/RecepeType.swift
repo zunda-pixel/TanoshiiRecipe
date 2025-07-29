@@ -5,7 +5,7 @@ public enum RecepeType: String, Decodable, Hashable, Sendable {
 
   /// 副菜
   case sideDish = "side_dish"
-  
+
   /// スープ
   case soup
 }

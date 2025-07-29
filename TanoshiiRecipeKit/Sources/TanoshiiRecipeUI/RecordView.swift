@@ -2,7 +2,7 @@ import SwiftUI
 
 struct RecordView: View {
   @State var router = NavigationRouter()
-  
+
   var body: some View {
     NavigationStack(path: $router.path) {
       List {

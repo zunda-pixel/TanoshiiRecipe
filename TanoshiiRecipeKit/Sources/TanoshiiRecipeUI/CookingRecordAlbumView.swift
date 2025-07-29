@@ -1,30 +1,31 @@
+import Kingfisher
 import SwiftUI
 import TanoshiiRecipeAPI
-import Kingfisher
 
 struct CookingRecordAlbumView: View {
   @Observable
   final class Model {
     var cookingRecords: [CookingRecord] = []
-    
+
     @ObservationIgnored var pagination: Pagination?
     @ObservationIgnored let client = Client()
     var isLoading = false
-    
+
     var selectedCookingRecord: CookingRecord?
-    
+
     var error: (any Error)?
     var isPresentedError = false
   }
-  
+
   @State var model = Model()
   @Namespace var namespace
-  
+
   func fetchData() async {
     guard model.isLoading == false else { return }
     defer { model.isLoading = false }
     if let total = model.pagination?.total,
-       model.cookingRecords.count >= total {
+      model.cookingRecords.count >= total
+    {
       return
     }
 
@@ -41,10 +42,10 @@ struct CookingRecordAlbumView: View {
       model.isPresentedError.toggle()
     }
   }
-  
+
   struct CellView: View {
     var cookingRecord: CookingRecord
-    
+
     var body: some View {
       KFImage(cookingRecord.imageUrl)
         .resizable()
@@ -74,7 +75,7 @@ struct CookingRecordAlbumView: View {
               model.selectedCookingRecord = cookingRecord
             }
         }
-        
+
         if model.cookingRecords.isEmpty && model.isLoading {
           ForEach(0..<10) { _ in
             CellView(cookingRecord: .sample)
@@ -128,8 +129,8 @@ extension CookingRecord {
   static let sample = CookingRecord(
     imageUrl: URL(string: "https://cooking-records.ex.oishi-kenko.com/images/2.jpg")!,
     comment: """
-パンチのきいた辛味が印象的です。
-""",
+      パンチのきいた辛味が印象的です。
+      """,
     recipeType: .mainDish,
     recordedAt: .now
   )

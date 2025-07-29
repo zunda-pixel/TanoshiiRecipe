@@ -2,9 +2,9 @@ import SwiftUI
 
 public struct ContentView: View {
   @State var selectedTab: TabItem = .record
-  
+
   public init() {}
-  
+
   @ViewBuilder
   func tabView(_ tab: TabItem) -> some View {
     switch tab {
@@ -15,7 +15,7 @@ public struct ContentView: View {
     case .mypage: Text("MyPage")
     }
   }
-  
+
   public var body: some View {
     TabView(selection: $selectedTab) {
       ForEach(TabItem.allCases, id: \.self) { tab in
@@ -39,7 +39,7 @@ enum TabItem: CaseIterable {
   case makeRecipe
   case record
   case mypage
-  
+
   var label: LocalizedStringKey {
     switch self {
     case .home: "Home"
@@ -49,7 +49,7 @@ enum TabItem: CaseIterable {
     case .mypage: "MyPage"
     }
   }
-  
+
   var iconName: String {
     switch self {
     case .home: "house"
