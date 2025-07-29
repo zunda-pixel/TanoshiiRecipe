@@ -115,7 +115,13 @@ struct CookingRecordAlbumView: View {
       await fetchData()
     }
     .alert("Error", isPresented: $model.isPresentedError, presenting: model.error) { error in
-      Text(error.localizedDescription)
+      Button {
+        model.isPresentedError.toggle()
+      } label: {
+        Text("Close")
+      }
+    } message: { error in
+      Text((error as? LocalizedError)?.errorDescription ?? error.localizedDescription)
     }
   }
 }
