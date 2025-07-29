@@ -35,10 +35,16 @@ struct CookingRecordDetailView: View {
     #endif
     .toolbar {
       #if !os(macOS)
-        if #available(iOS 26.0, *) {
-          ToolbarItem(placement: .topBarTrailing) {
+        ToolbarItem(placement: .topBarTrailing) {
+          if #available(iOS 26.0, *) {
             Button(role: .close) {
               dismiss()
+            }
+          } else {
+            Button {
+              dismiss()
+            } label: {
+              Text("Close")
             }
           }
         }
