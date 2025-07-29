@@ -30,6 +30,7 @@ public struct ContentView: View {
         }
       }
     }
+    .tint(.orange)
   }
 }
 
