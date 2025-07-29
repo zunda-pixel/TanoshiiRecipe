@@ -4,6 +4,7 @@ import TanoshiiRecipeAPI
 
 struct CookingRecordDetailView: View {
   var cookingRecord: CookingRecord
+  @Environment(\.dismiss) var dismiss
   
   var body: some View {
     NavigationStack {
@@ -26,6 +27,15 @@ struct CookingRecordDetailView: View {
           .lineLimit(nil)
       }
       .listStyle(.insetGrouped)
+      .toolbar {
+        ToolbarItem(placement: .topBarTrailing) {
+          if #available(iOS 26.0, *) {
+            Button(role: .close) {
+              dismiss()
+            }
+          }
+        }
+      }
     }
   }
 }
