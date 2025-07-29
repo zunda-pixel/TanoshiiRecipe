@@ -11,14 +11,15 @@ struct CookingRecordDetailView: View {
       KFImage(cookingRecord.imageUrl)
         .resizable()
         .aspectRatio(contentMode: .fit)
+        .clipShape(.rect(cornerRadius: 14))
         .frame(maxHeight: 400)
         .overlay(alignment: .topLeading) {
           Text(cookingRecord.recipeType.label)
             .padding(5)
             .background(.regularMaterial, in: .capsule)
-            .padding(5)
+            .padding(.horizontal, 5)
+            .padding(.vertical, 12)
         }
-        .clipShape(.rect(cornerRadius: 14))
 
       LabeledContent {
         Text(cookingRecord.recordedAt, style: .date)
