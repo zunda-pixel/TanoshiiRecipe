@@ -41,12 +41,5 @@ struct CookingRecordDetailView: View {
 }
 
 #Preview {
-  let cookingRecord = CookingRecord(
-    imageUrl: URL(string: "https://cooking-records.ex.oishi-kenko.com/images/2.jpg")!,
-    comment: "パンチのきいた辛味が印象的です。",
-    recipeType: .mainDish,
-    recordedAt: .now
-  )
-  
-  CookingRecordDetailView(cookingRecord: cookingRecord)
+  CookingRecordDetailView(cookingRecord: .sample)
 }
