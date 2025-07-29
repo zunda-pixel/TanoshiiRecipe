@@ -42,9 +42,17 @@ let package = Package(
     ),
     .testTarget(
       name: "TanoshiiRecipeAPITests",
-      dependencies: ["TanoshiiRecipeAPI"],
+      dependencies: [
+        .target(name: "TanoshiiRecipeAPI")
+      ],
       resources: [
         .process("Resources")
+      ]
+    ),
+    .testTarget(
+      name: "TanoshiiRecipeUILogicTests",
+      dependencies: [
+        .target(name: "TanoshiiRecipeUI")
       ]
     ),
   ]
