@@ -48,6 +48,7 @@ struct CookingRecordDetailView: View {
   CookingRecordDetailView(cookingRecord: .sample)
 }
 
+#if !os(macOS)
 struct CloseButton: UIViewRepresentable {
   var action: @MainActor () -> Void
 
@@ -62,3 +63,4 @@ struct CloseButton: UIViewRepresentable {
 
   func updateUIView(_ uiView: UIViewType, context: Context) {}
 }
+#endif
