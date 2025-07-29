@@ -74,6 +74,16 @@ struct CookingRecordAlbumView: View {
               model.selectedCookingRecord = cookingRecord
             }
         }
+        
+        if model.cookingRecords.isEmpty && model.isLoading {
+          ForEach(0..<10) { _ in
+            CellView(cookingRecord: .sample)
+              .redacted(reason: .placeholder)
+              .overlay {
+                ProgressView()
+              }
+          }
+        }
       }
     }
     .sheet(item: $model.selectedCookingRecord) { cookingRecord in
