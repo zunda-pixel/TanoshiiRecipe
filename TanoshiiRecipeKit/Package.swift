@@ -23,6 +23,7 @@ let package = Package(
     .package(url: "https://github.com/apple/swift-http-types.git", from: "1.4.0"),
     .package(url: "https://github.com/gohanlon/swift-memberwise-init-macro.git", from: "0.5.2"),
     .package(url: "https://github.com/onevcat/Kingfisher.git", from: "8.5.0"),
+    .package(url: "https://github.com/zunda-pixel/LicenseProvider.git", from: "1.5.1"),
   ],
   targets: [
     .target(
@@ -30,6 +31,9 @@ let package = Package(
       dependencies: [
         .target(name: "TanoshiiRecipeAPI"),
         .product(name: "Kingfisher", package: "Kingfisher"),
+      ],
+      plugins: [
+        .plugin(name: "LicenseProviderPlugin", package: "LicenseProvider"),
       ]
     ),
     .target(
