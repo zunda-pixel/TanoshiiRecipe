@@ -30,7 +30,7 @@ struct CookingRecordDetailView: View {
       Text(cookingRecord.comment)
     }
     #if !os(macOS)
-    .listStyle(.plain)
+      .listStyle(.plain)
     #endif
     .toolbar {
       #if !os(macOS)

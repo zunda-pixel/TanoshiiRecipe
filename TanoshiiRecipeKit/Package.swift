@@ -33,7 +33,7 @@ let package = Package(
         .product(name: "Kingfisher", package: "Kingfisher"),
       ],
       plugins: [
-        .plugin(name: "LicenseProviderPlugin", package: "LicenseProvider"),
+        .plugin(name: "LicenseProviderPlugin", package: "LicenseProvider")
       ]
     ),
     .target(
