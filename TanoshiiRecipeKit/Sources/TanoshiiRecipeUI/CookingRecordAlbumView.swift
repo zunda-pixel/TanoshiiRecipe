@@ -19,6 +19,7 @@ struct CookingRecordAlbumView: View {
 
   @State var model = Model()
   @Namespace var namespace
+  @Environment(NavigationRouter.self) var router
 
   func fetchData() async {
     guard model.isLoading == false else { return }
@@ -62,7 +63,13 @@ struct CookingRecordAlbumView: View {
 
   var body: some View {
     ScrollView(.vertical) {
-      LazyVGrid(columns: [.init(), .init()]) {
+      #if os(macOS)
+        let columnCount = 5
+      #else
+        let columnCount = 2
+      #endif
+
+      LazyVGrid(columns: Array(repeating: .init(), count: columnCount)) {
         ForEach(model.cookingRecords) { cookingRecord in
           CellView(cookingRecord: cookingRecord)
             .matchedTransitionSource(id: cookingRecord, in: namespace)
@@ -72,7 +79,11 @@ struct CookingRecordAlbumView: View {
             }
             .contentShape(.rect)
             .onTapGesture {
-              model.selectedCookingRecord = cookingRecord
+              #if os(macOS)
+                router.path.append(.cookingRecordDetail(cookingRecord))
+              #else
+                model.selectedCookingRecord = cookingRecord
+              #endif
             }
         }
 
@@ -88,8 +99,12 @@ struct CookingRecordAlbumView: View {
       }
     }
     .sheet(item: $model.selectedCookingRecord) { cookingRecord in
-      CookingRecordDetailView(cookingRecord: cookingRecord)
+      NavigationStack {
+        CookingRecordDetailView(cookingRecord: cookingRecord)
+      }
+      #if !os(macOS)
         .navigationTransition(.zoom(sourceID: cookingRecord, in: namespace))
+      #endif
     }
     .padding(.horizontal, 8)
     .navigationTitle(Text("Cooking Record Album"))

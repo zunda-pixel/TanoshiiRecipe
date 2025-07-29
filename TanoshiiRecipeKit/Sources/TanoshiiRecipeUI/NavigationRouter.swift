@@ -1,4 +1,5 @@
 import Observation
+import TanoshiiRecipeAPI
 
 @Observable
 final class NavigationRouter {
@@ -6,5 +7,6 @@ final class NavigationRouter {
 
   enum Item: Hashable {
     case cookingRecordAlbum
+    case cookingRecordDetail(CookingRecord)
   }
 }

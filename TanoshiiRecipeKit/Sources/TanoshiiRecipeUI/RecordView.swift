@@ -16,6 +16,8 @@ struct RecordView: View {
         switch item {
         case .cookingRecordAlbum:
           CookingRecordAlbumView()
+        case .cookingRecordDetail(let cookingRecord):
+          CookingRecordDetailView(cookingRecord: cookingRecord)
         }
       }
     }

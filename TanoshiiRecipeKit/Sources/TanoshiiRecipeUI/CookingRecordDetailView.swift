@@ -7,35 +7,41 @@ struct CookingRecordDetailView: View {
   @Environment(\.dismiss) var dismiss
 
   var body: some View {
-    NavigationStack {
-      List {
-        KFImage(cookingRecord.imageUrl)
-          .resizable()
-          .aspectRatio(contentMode: .fit)
-          .overlay(alignment: .topLeading) {
-            Text(cookingRecord.recipeType.label)
-              .padding(5)
-              .background(.regularMaterial, in: .capsule)
-              .padding(5)
-          }
-
-        LabeledContent("Registerd at") {
-          Text(cookingRecord.recordedAt, style: .date)
+    List {
+      KFImage(cookingRecord.imageUrl)
+        .resizable()
+        .aspectRatio(contentMode: .fit)
+        .frame(maxHeight: 400)
+        .overlay(alignment: .topLeading) {
+          Text(cookingRecord.recipeType.label)
+            .padding(5)
+            .background(.regularMaterial, in: .capsule)
+            .padding(5)
         }
+        .clipShape(.rect(cornerRadius: 14))
 
-        Text(cookingRecord.comment)
-          .lineLimit(nil)
+      LabeledContent {
+        Text(cookingRecord.recordedAt, style: .date)
+      } label: {
+        Text("Registerd at")
       }
+
+      Text(cookingRecord.comment)
+        .lineLimit(nil)
+    }
+    #if !os(macOS)
       .listStyle(.insetGrouped)
-      .toolbar {
-        ToolbarItem(placement: .topBarTrailing) {
-          if #available(iOS 26.0, *) {
+    #endif
+    .toolbar {
+      #if !os(macOS)
+        if #available(iOS 26.0, *) {
+          ToolbarItem(placement: .topBarTrailing) {
             Button(role: .close) {
               dismiss()
             }
           }
         }
-      }
+      #endif
     }
   }
 }
