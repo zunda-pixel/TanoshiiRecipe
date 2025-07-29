@@ -133,7 +133,7 @@ extension CookingRecord: Identifiable {
 extension RecepeType {
   var label: LocalizedStringKey {
     switch self {
-    case .mainDish: "Main Dith"
+    case .mainDish: "Main Dish"
     case .sideDish: "Side Dish"
     case .soup: "Soup"
     }
