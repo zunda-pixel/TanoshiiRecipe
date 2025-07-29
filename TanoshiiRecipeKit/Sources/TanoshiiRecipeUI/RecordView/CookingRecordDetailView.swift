@@ -28,24 +28,15 @@ struct CookingRecordDetailView: View {
       }
 
       Text(cookingRecord.comment)
-        .lineLimit(nil)
     }
     #if !os(macOS)
-      .listStyle(.insetGrouped)
+      .listStyle(.plain)
     #endif
     .toolbar {
       #if !os(macOS)
         ToolbarItem(placement: .topBarTrailing) {
-          if #available(iOS 26.0, *) {
-            Button(role: .close) {
-              dismiss()
-            }
-          } else {
-            Button {
-              dismiss()
-            } label: {
-              Text("Close")
-            }
+          CloseButton {
+            dismiss()
           }
         }
       #endif
@@ -55,4 +46,19 @@ struct CookingRecordDetailView: View {
 
 #Preview {
   CookingRecordDetailView(cookingRecord: .sample)
+}
+
+struct CloseButton: UIViewRepresentable {
+  var action: @MainActor () -> Void
+
+  func makeUIView(context: Context) -> some UIView {
+    return UIButton(
+      type: .close,
+      primaryAction: .init(handler: { _ in
+        action()
+      })
+    )
+  }
+
+  func updateUIView(_ uiView: UIViewType, context: Context) {}
 }

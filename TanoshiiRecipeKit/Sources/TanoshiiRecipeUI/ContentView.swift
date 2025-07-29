@@ -12,7 +12,7 @@ public struct ContentView: View {
     case .favorite: Text("Favorite")
     case .makeRecipe: Text("Recipe")
     case .record: RecordView()
-    case .mypage: Text("MyPage")
+    case .mypage: MyPageView()
     }
   }
 
@@ -30,6 +30,7 @@ public struct ContentView: View {
         }
       }
     }
+    .tint(.orange)
   }
 }
 

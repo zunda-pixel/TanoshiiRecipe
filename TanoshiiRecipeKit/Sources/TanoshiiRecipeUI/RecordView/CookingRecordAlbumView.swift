@@ -63,38 +63,44 @@ struct CookingRecordAlbumView: View {
 
   var body: some View {
     ScrollView(.vertical) {
-      #if os(macOS)
-        let columnCount = 5
-      #else
-        let columnCount = 2
-      #endif
+      LazyVStack {
+        #if os(macOS)
+          let columnCount = 5
+        #else
+          let columnCount = 2
+        #endif
 
-      LazyVGrid(columns: Array(repeating: .init(), count: columnCount)) {
-        ForEach(model.cookingRecords) { cookingRecord in
-          CellView(cookingRecord: cookingRecord)
-            .matchedTransitionSource(id: cookingRecord, in: namespace)
-            .task {
-              guard cookingRecord == model.cookingRecords.last else { return }
-              await fetchData()
-            }
-            .contentShape(.rect)
-            .onTapGesture {
-              #if os(macOS)
-                router.path.append(.cookingRecordDetail(cookingRecord))
-              #else
-                model.selectedCookingRecord = cookingRecord
-              #endif
-            }
-        }
-
-        if model.cookingRecords.isEmpty && model.isLoading {
-          ForEach(0..<10) { _ in
-            CellView(cookingRecord: .sample)
-              .redacted(reason: .placeholder)
-              .overlay {
-                ProgressView()
+        LazyVGrid(columns: Array(repeating: .init(), count: columnCount)) {
+          ForEach(model.cookingRecords) { cookingRecord in
+            CellView(cookingRecord: cookingRecord)
+              .matchedTransitionSource(id: cookingRecord, in: namespace)
+              .task {
+                guard cookingRecord == model.cookingRecords.last else { return }
+                await fetchData()
+              }
+              .contentShape(.rect)
+              .onTapGesture {
+                #if os(macOS)
+                  router.path.append(.cookingRecordDetail(cookingRecord))
+                #else
+                  model.selectedCookingRecord = cookingRecord
+                #endif
               }
           }
+
+          if model.cookingRecords.isEmpty && model.isLoading {
+            ForEach(0..<10) { _ in
+              CellView(cookingRecord: .sample)
+                .redacted(reason: .placeholder)
+                .overlay {
+                  ProgressView()
+                }
+            }
+          }
+        }
+
+        if model.isLoading {
+          ProgressView()
         }
       }
     }
@@ -115,7 +121,13 @@ struct CookingRecordAlbumView: View {
       await fetchData()
     }
     .alert("Error", isPresented: $model.isPresentedError, presenting: model.error) { error in
-      Text(error.localizedDescription)
+      Button {
+        model.isPresentedError.toggle()
+      } label: {
+        Text("Close")
+      }
+    } message: { error in
+      Text((error as? LocalizedError)?.errorDescription ?? error.localizedDescription)
     }
   }
 }

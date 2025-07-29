@@ -1,5 +1,5 @@
 {
-  "originHash" : "5baefa2ffc35de3f252272e0e4320490e9d548fc6b40bdadbd6a86027551bd01",
+  "originHash" : "919cd91b0d9360ba073f4d15c1baa42a21deba85f8a7e076d7fff75630640a7f",
   "pins" : [
     {
       "identity" : "kingfisher",
@@ -8,6 +8,15 @@
       "state" : {
         "revision" : "2015fda791daa72c8058619545a593bf8c1dd59f",
         "version" : "8.5.0"
+      }
+    },
+    {
+      "identity" : "licenseprovider",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/zunda-pixel/LicenseProvider.git",
+      "state" : {
+        "revision" : "223cf9207a64918b783acafc7992c727e9fa2d91",
+        "version" : "1.5.1"
       }
     },
     {
