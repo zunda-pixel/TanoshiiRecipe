@@ -51,6 +51,16 @@
         }
       }
     },
+    "Licenses" : {
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ライセンス"
+          }
+        }
+      }
+    },
     "Main Dish" : {
       "localizations" : {
         "ja" : {
