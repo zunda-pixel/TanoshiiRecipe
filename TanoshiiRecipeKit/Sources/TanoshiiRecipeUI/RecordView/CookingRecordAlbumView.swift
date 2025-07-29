@@ -32,7 +32,6 @@ struct CookingRecordAlbumView: View {
 
     do {
       model.isLoading = true
-      try await Task.sleep(for: .seconds(2))
       let response = try await model.client.cookingRecords(
         offset: model.cookingRecords.count,
         limit: 10
