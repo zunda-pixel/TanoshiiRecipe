@@ -12,6 +12,9 @@ struct CookingRecordAlbumView: View {
     var isLoading = false
     
     var selectedCookingRecord: CookingRecord?
+    
+    var error: (any Error)?
+    var isPresentedError = false
   }
   
   @State var model = Model()
@@ -34,7 +37,8 @@ struct CookingRecordAlbumView: View {
       model.pagination = response.pagination
       model.cookingRecords.append(contentsOf: response.cookingRecords)
     } catch {
-      print(error)
+      model.error = error
+      model.isPresentedError.toggle()
     }
   }
   
@@ -83,6 +87,9 @@ struct CookingRecordAlbumView: View {
     }
     .task {
       await fetchData()
+    }
+    .alert("Error", isPresented: $model.isPresentedError, presenting: model.error) { error in
+      Text(error.localizedDescription)
     }
   }
 }
