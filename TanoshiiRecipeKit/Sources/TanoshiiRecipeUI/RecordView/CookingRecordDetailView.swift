@@ -49,18 +49,18 @@ struct CookingRecordDetailView: View {
 }
 
 #if !os(macOS)
-struct CloseButton: UIViewRepresentable {
-  var action: @MainActor () -> Void
+  struct CloseButton: UIViewRepresentable {
+    var action: @MainActor () -> Void
 
-  func makeUIView(context: Context) -> some UIView {
-    return UIButton(
-      type: .close,
-      primaryAction: .init(handler: { _ in
-        action()
-      })
-    )
+    func makeUIView(context: Context) -> some UIView {
+      return UIButton(
+        type: .close,
+        primaryAction: .init(handler: { _ in
+          action()
+        })
+      )
+    }
+
+    func updateUIView(_ uiView: UIViewType, context: Context) {}
   }
-
-  func updateUIView(_ uiView: UIViewType, context: Context) {}
-}
 #endif
